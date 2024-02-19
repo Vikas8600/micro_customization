@@ -228,5 +228,6 @@ app_license = "apache-2.0"
 # }
 
 fixtures = [
-    {"dt": "Property Setter", "filters": [["module", "in", ["Micro Customization"]]]},
+    {"dt": "Property Setter", "filters": [["module", "in", [app_title]]]},
+    {"dt": "Custom Field", "filters": [["module", "=", app_title]]},
 ]
