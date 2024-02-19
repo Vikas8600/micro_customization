@@ -7,12 +7,12 @@
   "doctype_or_field": "DocField",
   "field_name": "due_date_based_on",
   "is_system_generated": 0,
-  "modified": "2024-02-19 15:30:04.061200",
+  "modified": "2024-02-19 16:04:03.448659",
   "module": "Micro Customization",
   "name": "Payment Term-due_date_based_on-options",
   "property": "options",
   "property_type": null,
   "row_name": null,
-  "value": "Day(s) after invoice date\nDay(s) after the end of the invoice month\nMonth(s) after the end of the invoice month\n7 days after PR is created\n15 days after PR is created\n30 days after PR is created\n30-45 days after PR is created\n45 days after PR is created\n60 days after PR is created\n100 days after PR is created\n7 days after invoice creation\n45 days after invoice creation\n60 days after invoice creation\n90 days after invoice creation\n135 days after invoice creation\nHow is completion of work determined?\nHow is dispatch determined? \nHow is installation determined?\nPlease eleaborate on the same?\nHow is installation determined? Is it based on installation note?\nHow is dispatch determined? How is installation determined?"
+  "value": "Day(s) after invoice date\nDay(s) after the end of the invoice month\nMonth(s) after the end of the invoice month\n7 days after PR is created\n15 days after PR is created\n30 days after PR is created\n30-45 days after PR is created\n45 days after PR is created\n60 days after PR is created\n100 days after PR is created\n7 days after invoice creation\n45 days after invoice creation\n60 days after invoice creation\n90 days after invoice creation\n135 days after invoice creation\nCompletion of Work\nOn Installation"
  }
 ]
