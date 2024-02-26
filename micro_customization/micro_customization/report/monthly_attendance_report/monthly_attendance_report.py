@@ -414,17 +414,19 @@ def get_attendance_status_for_summarized_view(
 
 	total_days = get_total_days_in_month(filters)
 	total_holidays = total_unmarked_days = 0
-
-	for day in range(1, total_days + 1):
-		if day in attendance_days:
+	from_date = datetime.strptime(filters.from_date, "%Y-%m-%d")
+	for day in range(0, total_days):
+		date = from_date + timedelta(days=day)
+		dt = date.strftime("%d-%m")
+		dt_to_format = date.strftime("%d-%m-%y")
+		formatted_output = datetime.strptime(dt_to_format, "%d-%m-%y").date()
+		if formatted_output in attendance_days:
 			continue
-
-		status = get_holiday_status(day, holidays)
+		status = get_holiday_status(dt, holidays)
 		if status in ["Weekly Off", "Holiday"]:
 			total_holidays += 1
 		elif not status:
-			total_unmarked_days += 1
-
+			total_unmarked_days += 1	
 	return {
 		"total_present": summary.total_present + summary.total_half_days,
 		"total_leaves": summary.total_leaves + summary.total_half_days,
@@ -472,7 +474,7 @@ def get_attendance_summary_and_days(employee: str, filters: Filters) -> Tuple[Di
 
 	days = (
 		frappe.qb.from_(Attendance)
-		.select(Extract("day", Attendance.attendance_date).as_("day_of_month"))
+		.select(Attendance.attendance_date)
 		.distinct()
 		.where(
 			(Attendance.docstatus == 1)
