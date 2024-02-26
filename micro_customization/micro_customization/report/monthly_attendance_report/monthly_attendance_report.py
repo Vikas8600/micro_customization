@@ -177,7 +177,7 @@ def get_columns_for_days(filters: Filters) -> List[Dict]:
 def get_total_days_in_month(filters: Filters) -> int:
 	from_date = getdate(filters.from_date)
 	to_date = getdate(filters.to_date)
-	return (to_date - from_date).days
+	return (to_date - from_date).days + 1
 
 
 def get_data(filters: Filters, attendance_map: Dict) -> List[Dict]:
