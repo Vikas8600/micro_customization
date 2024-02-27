@@ -29,9 +29,11 @@ app_license = "apache-2.0"
 
 # include js in doctype views
 doctype_js = {
-                "Purchase Invoice" : "public/js/purchase_invoice.js" 
-            }
-# doctype_list_js = {"doctype" : "public/js/doctype_list.js"}
+    "Purchase Invoice" : "public/js/purchase_invoice.js" 
+}
+doctype_list_js = {
+    "Asset" : "public/js/list/asset.js"
+}
 # doctype_tree_js = {"doctype" : "public/js/doctype_tree.js"}
 # doctype_calendar_js = {"doctype" : "public/js/doctype_calendar.js"}
 
