@@ -49,6 +49,11 @@ frappe.ui.form.on('Purchase Invoice', {
             }
 
         }
+        frm.doc.taxes.forEach(element=>{
+            if(element.rate!=0){
+                element.tax_amount = (element.rate *frm.doc.total)/100
+            }
+        })
 
     },
     cnp_expected_installation_date: frm => {
@@ -56,10 +61,34 @@ frappe.ui.form.on('Purchase Invoice', {
     },
     cnp_installation_date: frm => {
         update_due_date(frm)
+    },
+    supplier: frm =>{
+        if(frm.doc.apply_tds){            
+        frappe.call({
+            method: 'micro_customization.micro_customization.overrides.purchase_invoice.get_supplier_tds_details',
+            args: { supplier: frm.doc.supplier },
+            freeze: true,
+            callback: r => {
+                if (r.message) {
+                    r.message.forEach(element => {
+                        const row = frm.add_child('taxes');
+                        row.charge_type = "Actual";
+                        row.account_head = element.account_head;
+                        row.add_deduct_tax = "Deduct";
+                        row.description = element.charge_type
+                        row.total = 0
+                    });
+                    frm.refresh_field('taxes');
+                }
+            }
+        })
+    }
     }
 
 
 })
+
+
 function update_due_date(frm) {
     let installation_date = frm.doc.cnp_installation_date
     let expected_installation_date = frm.doc.cnp_expected_installation_date
