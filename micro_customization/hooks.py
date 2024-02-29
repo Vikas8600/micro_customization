@@ -118,9 +118,9 @@ doctype_list_js = {
 # ---------------
 # Override standard doctype classes
 
-# override_doctype_class = {
-# 	"ToDo": "custom_app.overrides.CustomToDo"
-# }
+override_doctype_class = {
+	"Purchase Invoice": "micro_customization.micro_customization.overrides.purchase_invoice.CustomPurchaseInvoice"
+}
 
 # Document Events
 # ---------------
