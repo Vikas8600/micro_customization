@@ -130,4 +130,14 @@ erpnext.taxes.set_conditional_mandatory_rate_or_amount = function(grid_row) {
 }
 
 erpnext.taxes_and_totals.prototype.set_cumulative_total= function(row_idx, tax) {
+    if(tax.add_deduct_tax=="Deduct"){
+        tax.total = this.frm.doc.items[row_idx].amount
+    }
+    else{
+        if(row_idx==0) {
+			tax.total = flt(this.frm.doc.net_total + tax_amount, precision("total", tax));
+		} else {
+			tax.total = flt(this.frm.doc["taxes"][row_idx-1].total + tax_amount, precision("total", tax));
+		}
+    }
 }
