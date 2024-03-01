@@ -49,9 +49,11 @@ frappe.ui.form.on('Purchase Invoice', {
             }
 
         }
+        
         frm.doc.taxes.forEach(element=>{
-            if(element.rate!=0){
-                element.tax_amount = (element.rate *frm.doc.total)/100
+            if(element.rate!=0 && element.add_deduct_tax=="Deduct"){
+                element.tax_amount = (element.rate *element.total)/100
+                element.total = element.total - element.tax_amount
             }
         })
         frm.refresh_field('taxes');
@@ -79,7 +81,8 @@ frappe.ui.form.on('Purchase Invoice', {
                             row.account_head = element.account_head;
                             row.add_deduct_tax = "Deduct";
                             row.description = element.charge_type;
-                            row.total = 0;
+                            row.total = 0.0;
+                            row.rate = 0.0;
                         }
                     });
                     frm.refresh_field('taxes');
@@ -104,4 +107,19 @@ function update_due_date(frm) {
         frm.doc.payment_schedule[0].due_date = expected_installation_date;
         frm.doc.due_date = expected_installation_date;
     }
+}
+erpnext.taxes.set_conditional_mandatory_rate_or_amount = function(grid_row) {
+	if(grid_row) {
+		if(grid_row.doc.charge_type==="Actual") {
+			grid_row.toggle_editable("tax_amount", true);
+			grid_row.toggle_reqd("tax_amount", true);
+			grid_row.toggle_editable("rate", true);
+			grid_row.toggle_reqd("rate", false);
+		} else {
+			grid_row.toggle_editable("rate", true);
+			grid_row.toggle_reqd("rate", true);
+			grid_row.toggle_editable("tax_amount", false);
+			grid_row.toggle_reqd("tax_amount", false);
+		}
+	}
 }
