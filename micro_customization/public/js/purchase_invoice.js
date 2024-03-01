@@ -54,6 +54,7 @@ frappe.ui.form.on('Purchase Invoice', {
                 element.tax_amount = (element.rate *frm.doc.total)/100
             }
         })
+        frm.refresh_field('taxes');
 
     },
     cnp_expected_installation_date: frm => {
@@ -71,12 +72,15 @@ frappe.ui.form.on('Purchase Invoice', {
             callback: r => {
                 if (r.message) {
                     r.message.forEach(element => {
-                        const row = frm.add_child('taxes');
-                        row.charge_type = "Actual";
-                        row.account_head = element.account_head;
-                        row.add_deduct_tax = "Deduct";
-                        row.description = element.charge_type
-                        row.total = 0
+                        const existingRow = frm.doc.taxes.find(row => row.account_head === element.account_head);
+                        if (!existingRow) {
+                            const row = frm.add_child('taxes');
+                            row.charge_type = "Actual";
+                            row.account_head = element.account_head;
+                            row.add_deduct_tax = "Deduct";
+                            row.description = element.charge_type;
+                            row.total = 0;
+                        }
                     });
                     frm.refresh_field('taxes');
                 }
