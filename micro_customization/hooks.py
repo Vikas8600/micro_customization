@@ -234,15 +234,4 @@ override_doctype_class = {
 fixtures = [
     {"dt": "Property Setter", "filters": [["module", "in", [app_title]]]},
     {"dt": "Custom Field", "filters": [["module", "=", app_title]]},
-    {
-        "dt": "Custom Field",
-        "filters": [
-            [
-                "name",
-                "in",
-                ["Supplier-cnp_tds_details",
-                 "Supplier-cnp_tds"]
-			]
-		]
-	}
 ]
