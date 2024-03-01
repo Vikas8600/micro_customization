@@ -1,3 +1,7 @@
+erpnext.taxes_and_totals = class CustomTaxesAndTotals extends erpnext.taxes_and_totals {
+    set_cumulative_total(row_idx, tax) {}
+}
+
 frappe.ui.form.on('Purchase Invoice', {
     refresh: frm => {
         if (frm.doc.items) {

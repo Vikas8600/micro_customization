@@ -8,11 +8,13 @@ class CustomPurchaseInvoice(PurchaseInvoice):
     def validate(self):
         taxes = self.get("taxes")
         tax_dict = {tax.name: tax.rate for tax in taxes if tax.charge_type == 'Actual'}
+        tax_totals = {tax.name: tax.total for tax in taxes if tax.charge_type == 'Actual'}
         super(CustomPurchaseInvoice, self).validate()
         for tax in self.taxes:
             if tax.charge_type == 'Actual':
                 if tax.name:
                     tax.rate = tax_dict[tax.name]
+                    tax.total = tax_totals[tax.name]
     
     def set_tax_withholding(self):
         if not self.apply_tds:
