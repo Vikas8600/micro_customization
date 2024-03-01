@@ -1,6 +1,3 @@
-erpnext.taxes_and_totals = class CustomTaxesAndTotals extends erpnext.taxes_and_totals {
-    set_cumulative_total(row_idx, tax) {}
-}
 
 frappe.ui.form.on('Purchase Invoice', {
     refresh: frm => {
@@ -69,6 +66,10 @@ frappe.ui.form.on('Purchase Invoice', {
     cnp_installation_date: frm => {
         update_due_date(frm)
     },
+    on_update: frm =>{
+        
+
+    },
     supplier: frm =>{
         if(frm.doc.apply_tds){            
         frappe.call({
@@ -126,4 +127,7 @@ erpnext.taxes.set_conditional_mandatory_rate_or_amount = function(grid_row) {
 			grid_row.toggle_reqd("tax_amount", false);
 		}
 	}
+}
+
+erpnext.taxes_and_totals.prototype.set_cumulative_total= function(row_idx, tax) {
 }
