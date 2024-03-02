@@ -126,13 +126,11 @@ override_doctype_class = {
 # ---------------
 # Hook on document methods and events
 
-# doc_events = {
-# 	"*": {
-# 		"on_update": "method",
-# 		"on_cancel": "method",
-# 		"on_trash": "method"
-# 	}
-# }
+doc_events = {
+	"Supplier": {
+		"before_save": "micro_customization.micro_customization.overrides.supplier.before_save",
+	}
+}
 
 # Scheduled Tasks
 # ---------------
