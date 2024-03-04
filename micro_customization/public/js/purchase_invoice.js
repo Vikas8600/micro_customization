@@ -50,14 +50,15 @@ frappe.ui.form.on('Purchase Invoice', {
             }
 
         }
-        
-        frm.doc.taxes.forEach(element=>{
-            if(element.rate!=0 && element.add_deduct_tax=="Deduct"){
-                element.tax_amount = (element.rate *element.total)/100
-                element.total = element.total - element.tax_amount
-            }
-        })
-        frm.refresh_field('taxes');
+        if(frm.doc.taxes){
+            frm.doc.taxes.forEach(element=>{
+                if(element.rate!=0 && element.add_deduct_tax=="Deduct"){
+                    element.tax_amount = (element.rate *element.total)/100
+                    element.total = element.total - element.tax_amount
+                }
+            })
+            frm.refresh_field('taxes');
+        }
 
     },
     cnp_expected_installation_date: frm => {
