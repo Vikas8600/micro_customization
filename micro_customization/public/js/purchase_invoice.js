@@ -85,7 +85,7 @@ frappe.ui.form.on('Purchase Invoice', {
                             existingRow = frm.doc.taxes.find(row => row.account_head === element.account_head);   
                         }
                         else{
-                            existingRow = false
+                            existingRow = false;
                         }
                         if (!existingRow) {
                             const row = frm.add_child('taxes');
