@@ -72,7 +72,7 @@ frappe.ui.form.on('Purchase Invoice', {
 
     },
     supplier: frm =>{
-        if(frm.doc.apply_tds && frm.doc.supplier){            
+        if(frm.doc.supplier){            
         frappe.call({
             method: 'micro_customization.micro_customization.overrides.purchase_invoice.get_supplier_tds_details',
             args: { supplier: frm.doc.supplier },

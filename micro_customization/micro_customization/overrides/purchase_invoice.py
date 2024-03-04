@@ -82,7 +82,7 @@ class CustomPurchaseInvoice(PurchaseInvoice):
 def get_supplier_tds_details(supplier):
     records = []
     supplier_tds = frappe.get_doc("Supplier", supplier)
-    if not supplier_tds.cnp_tds_details:
+    if not supplier_tds.cnp_tds_details and not supplier_tds.tax_withholding_category:
         return None
     
     for tax in supplier_tds.cnp_tds_details:
