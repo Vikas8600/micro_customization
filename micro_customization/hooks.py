@@ -118,21 +118,19 @@ doctype_list_js = {
 # ---------------
 # Override standard doctype classes
 
-# override_doctype_class = {
-# 	"ToDo": "custom_app.overrides.CustomToDo"
-# }
+override_doctype_class = {
+	"Purchase Invoice": "micro_customization.micro_customization.overrides.purchase_invoice.CustomPurchaseInvoice"
+}
 
 # Document Events
 # ---------------
 # Hook on document methods and events
 
-# doc_events = {
-# 	"*": {
-# 		"on_update": "method",
-# 		"on_cancel": "method",
-# 		"on_trash": "method"
-# 	}
-# }
+doc_events = {
+	"Supplier": {
+		"before_save": "micro_customization.micro_customization.overrides.supplier.before_save",
+	}
+}
 
 # Scheduled Tasks
 # ---------------
