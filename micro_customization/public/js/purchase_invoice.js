@@ -80,7 +80,13 @@ frappe.ui.form.on('Purchase Invoice', {
             callback: r => {
                 if (r.message) {
                     r.message.forEach(element => {
-                        const existingRow = frm.doc.taxes.find(row => row.account_head === element.account_head);
+                        let existingRow ;
+                        if(frm.doc.taxes){
+                            existingRow = frm.doc.taxes.find(row => row.account_head === element.account_head);   
+                        }
+                        else{
+                            existingRow = false
+                        }
                         if (!existingRow) {
                             const row = frm.add_child('taxes');
                             row.charge_type = "Actual";
